@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyx.MoneyManager.Mapper.MoneyMapper">
+    <resultMap id="money" type="com.wyx.MoneyManager.Entity.Money">
+        <id column="money_id" property="moneyId"/>
+        <result column="money" property="money"/>
+    </resultMap>
+
+
+    <!--    double addMoneyByUserId(int userId, double moneyExchange);-->
+    <update id="addMoneyByUserId">
+        UPDATE `money` m
+        SET m.money = m.money + #{moneyExchange}
+        WHERE m.money_id = (
+            SELECT um.`money_id`
+            FROM user_money um
+            WHERE um.`user_id` = #{userId}
+        )
+    </update>
+
+    <!--    double minusMoneyByUserId(int userId, double moneyExchange);-->
+    <update id="modifyByUserId">
+        UPDATE `money` m
+        SET m.money = m.money + #{moneyExchange}
+        WHERE m.money_id = (
+            SELECT um.`money_id`
+            FROM user_money um
+            WHERE um.`user_id` = #{userId}
+        )
+    </update>
+
+
+    <select id="getMoneyByUserId" resultMap="money">
+        SELECT m.`money`
+        FROM money m
+        WHERE m.`money_id` = #{userId};
+    </select>
+
+
+</mapper>

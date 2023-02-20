@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyx.MoneyManager.Mapper.UserMapper">
+
+    <resultMap id="user" type="com.wyx.MoneyManager.Entity.User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+<!--    User getUserByUserId(int userId);-->
+    <select id="getUserByUserId" resultMap="user">
+        SELECT *
+        FROM `user` u
+        WHERE u.`user_id` = #{userId};
+    </select>
+</mapper>
