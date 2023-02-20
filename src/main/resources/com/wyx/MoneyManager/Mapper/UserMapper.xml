@@ -9,10 +9,40 @@
         <result column="user_name" property="userName"/>
     </resultMap>
 
-<!--    User getUserByUserId(int userId);-->
+    <resultMap id="money_user" type="com.wyx.MoneyManager.Entity.UserMoney">
+        <id column="user_money_id" property="userMoneyId"/>
+        <result column="user_id" property="userId"/>
+        <result column="money_id" property="moneyId"/>
+    </resultMap>
+
+
+    <!--    void addUser(String userName);-->
+    <insert id="addUser">
+        INSERT INTO `user`(user_name)
+            VALUE (#{userName});
+    </insert>
+
+
+    <!--    void insertUserMoney(int userId, int moneyId);-->
+    <insert id="insertUserMoney">
+        INSERT INTO `user_money`(user_id, money_id)
+            VALUE (#{userId}, #{moneyId})
+    </insert>
+
+    <!--    User getUserByUserId(int userId);-->
     <select id="getUserByUserId" resultMap="user">
         SELECT *
         FROM `user` u
         WHERE u.`user_id` = #{userId};
     </select>
+
+
+    <!--    int getUserId(String userName);-->
+    <select id="getUserId" resultType="java.lang.Integer">
+        SELECT u.`user_id`
+        FROM `user` u
+        WHERE u.`user_name` = #{userName}
+    </select>
+
+
 </mapper>

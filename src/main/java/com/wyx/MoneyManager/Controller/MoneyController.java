@@ -24,14 +24,18 @@ public class MoneyController {
     @GetMapping("/modifyByUserId/{userId}/{moneyExchange}")
     public String modifyByUserId(@PathVariable int userId,
                                  @PathVariable double moneyExchange) {
-        // 一次计算不能为负数,也不能大于10000
-        if (moneyExchange > 10000) {
+        // 一次计算不能为负数,也不能大于999999
+        if (moneyExchange > 999999) {
             return "400";
         }
         service.modifyByUserId(userId, moneyExchange);
         return "200";
     }
 
+    @GetMapping("/getMoneyByName/{userName}")
+    public double getMoneyByName(@PathVariable("userName") String userName) {
+        return service.getMoneyByName(userName);
+    }
 
 
 }

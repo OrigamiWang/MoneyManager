@@ -1,6 +1,7 @@
 package com.wyx.MoneyManager.Controller;
 
 import com.wyx.MoneyManager.Entity.User;
+import com.wyx.MoneyManager.Service.MoneyService;
 import com.wyx.MoneyManager.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +26,9 @@ public class UserController {
         return service.getUserById(userId);
     }
 
+    @GetMapping("/initUser")
+    public int initUser(String userName) {
+        return service.initUser(userName);
+    }
 
 }

@@ -14,4 +14,12 @@ public interface MoneyMapper {
 
     void modifyByUserId(int userId, double moneyExchange);
 
+    double getMoneyByName(String userName);
+
+    /***
+    * @return: int 返回插入的数据的money_id
+    */
+    void insertMoney();
+
+    int getSum();
 }

@@ -23,5 +23,20 @@ public class MoneyServiceImpl implements MoneyService {
         mapper.modifyByUserId(userId, moneyExchange);
     }
 
+    @Override
+    public double getMoneyByName(String userName) {
+        return mapper.getMoneyByName(userName);
+    }
+
+    @Override
+    public void insertMoney() {
+        mapper.insertMoney();
+    }
+
+    @Override
+    public int getSum() {
+        return mapper.getSum();
+    }
+
 
 }

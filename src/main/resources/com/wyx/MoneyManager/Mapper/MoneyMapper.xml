@@ -8,6 +8,12 @@
         <result column="money" property="money"/>
     </resultMap>
 
+    <!--    void insertMoney();-->
+    <insert id="insertMoney">
+        INSERT INTO money(money)
+        VALUE (0);
+    </insert>
+
 
     <!--    double addMoneyByUserId(int userId, double moneyExchange);-->
     <update id="addMoneyByUserId">
@@ -36,6 +42,26 @@
         SELECT m.`money`
         FROM money m
         WHERE m.`money_id` = #{userId};
+    </select>
+
+    <!--    double getMoneyByName(String userName)-->
+    <select id="getMoneyByName" resultType="java.lang.Double">
+        SELECT m.`money`
+        FROM money m
+        WHERE m.`money_id` = (
+            SELECT um.`money_id`
+            FROM `user_money` um
+            WHERE um.`user_id` = (
+                SELECT u.`user_id`
+                FROM `user` u
+                WHERE u.`user_name` = #{userName}
+            )
+        )
+    </select>
+
+    <select id="getSum" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM money;
     </select>
 
 
